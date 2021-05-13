@@ -7,6 +7,7 @@ function App() {
       <header className="flex items-center bg-white h-16">
         <input
           type="search"
+          placeholder="Search for a City"
           className="ml-4 py-2 px-4 rounded-md border border-purple-500 outline-none"
         />
       </header>
