@@ -23,7 +23,7 @@ export default function CityCard() {
         {/* City Details go here */}
         <div className="flex flex-col justify-around w-1/2">
           <QualityScore>
-            <a href="">Housing</a>
+            <a href="#">Housing</a>
           </QualityScore>
           <QualityScore>Cost of Living</QualityScore>
           <QualityScore>Startups</QualityScore>
