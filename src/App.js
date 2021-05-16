@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import CityCard from "./cityCard.js";
+import CityCard from "./CityCard.js";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -40,7 +40,7 @@ function App() {
         </form>
       </header>
       <section className="flex-grow w-full flex flex-col justify-center items-center">
-        <CityCard></CityCard>
+        <CityCard data={city}></CityCard>
       </section>
     </div>
   );
