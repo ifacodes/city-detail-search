@@ -1,8 +1,10 @@
 import React from "react";
 
-export default function QualityScore({ data }) {
+export default function QualityScore({ className, data }) {
   return (
-    <div className="flex justify-around items-center font-semibold text-lg mx-8">
+    <div
+      className={`${className} flex justify-around items-center font-semibold text-lg mx-8`}
+    >
       <div className="w-1/2 font-semibold text-lg">{data.name}</div>
       <div className="w-1/3 overflow-hidden h-2 text-xs flex rounded bg-gray-300">
         <div

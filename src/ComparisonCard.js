@@ -117,7 +117,7 @@ export default function ComparisonCard({ data }) {
                   <QualityScore data={city1.scores[7]}></QualityScore>
                   <QualityScore data={city1.scores[8]}></QualityScore>
                 </div>
-                <div className="flex flex-col justify-around sm:w-1/2 w-full sm:my-0 my-2 pt-3 sm:space-y-0 space-y-2">
+                <div className="flex flex-col justify-around sm:w-1/2 w-full sm:my-0 my-2 sm:pt-0 pt-3 sm:space-y-0 space-y-2">
                   <QualityScore data={city1.scores[9]}></QualityScore>
                   <QualityScore data={city1.scores[10]}></QualityScore>
                   <QualityScore data={city1.scores[11]}></QualityScore>
@@ -126,6 +126,10 @@ export default function ComparisonCard({ data }) {
                   <QualityScore data={city1.scores[14]}></QualityScore>
                   <QualityScore data={city1.scores[15]}></QualityScore>
                   <QualityScore data={city1.scores[16]}></QualityScore>
+                  <QualityScore
+                    className="invisible"
+                    data={city1.scores[16]}
+                  ></QualityScore>
                 </div>
               </Fragment>
             ) : (
@@ -191,7 +195,7 @@ export default function ComparisonCard({ data }) {
                   <QualityScore data={city2.scores[7]}></QualityScore>
                   <QualityScore data={city2.scores[8]}></QualityScore>
                 </div>
-                <div className="flex flex-col justify-around sm:w-1/2 w-full sm:my-0 my-2 pt-3 sm:space-y-0 space-y-2">
+                <div className="flex flex-col justify-around sm:w-1/2 w-full sm:my-0 sm:pt-0 pt-3 my-2 sm:space-y-0 space-y-2">
                   <QualityScore data={city2.scores[9]}></QualityScore>
                   <QualityScore data={city2.scores[10]}></QualityScore>
                   <QualityScore data={city2.scores[11]}></QualityScore>
@@ -200,6 +204,10 @@ export default function ComparisonCard({ data }) {
                   <QualityScore data={city2.scores[14]}></QualityScore>
                   <QualityScore data={city2.scores[15]}></QualityScore>
                   <QualityScore data={city2.scores[16]}></QualityScore>
+                  <QualityScore
+                    className="invisible"
+                    data={city2.scores[16]}
+                  ></QualityScore>
                 </div>
               </Fragment>
             ) : (

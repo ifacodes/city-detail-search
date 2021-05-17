@@ -82,7 +82,7 @@ export default function CityCard({ data }) {
                   <QualityScore data={state.scores[7]}></QualityScore>
                   <QualityScore data={state.scores[8]}></QualityScore>
                 </div>
-                <div className="flex flex-col justify-around sm:w-1/2 w-full sm:my-0 my-2 pt-3 sm:space-y-0 space-y-2">
+                <div className="flex flex-col justify-around sm:w-1/2 w-full sm:my-0 my-2 sm:pt-0 pt-3 sm:space-y-0 space-y-2">
                   <QualityScore data={state.scores[9]}></QualityScore>
                   <QualityScore data={state.scores[10]}></QualityScore>
                   <QualityScore data={state.scores[11]}></QualityScore>
@@ -91,6 +91,10 @@ export default function CityCard({ data }) {
                   <QualityScore data={state.scores[14]}></QualityScore>
                   <QualityScore data={state.scores[15]}></QualityScore>
                   <QualityScore data={state.scores[16]}></QualityScore>
+                  <QualityScore
+                    className="invisible"
+                    data={state.scores[16]}
+                  ></QualityScore>
                 </div>
               </Fragment>
             ) : (
