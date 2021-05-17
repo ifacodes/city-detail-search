@@ -41,7 +41,7 @@ export default function CityCard({ data }) {
   }, [data]);
 
   return (
-    <div className="rounded-2xl shadow-lg bg-white sm:w-5/6 w-full flex-grow my-10 flex flex-col">
+    <div className="rounded-2xl shadow-lg bg-white md:w-5/6 w-full  my-10 flex flex-col">
       <header className="flex items-center justify-between p-6 border-b border-solid border-gray-300 rounded-t">
         <div className="border-0 hover:border-2 hover:border-red-500">
           <h1 className="ml-2 text-3xl text-gray-700 font-semibold">
@@ -65,13 +65,13 @@ export default function CityCard({ data }) {
           <br />A Topia Company
         </a>
       </header>
-      <section className="my-4 sm:mx-0 mx-4 flex-grow flex sm:flex-row flex-col items-stretch sm:divide-x sm:divide-y-0 divide-y divide-x-0 divide-gray-300">
+      <section className="my-4 md:mx-0 mx-4 flex-grow flex md:flex-row flex-col items-stretch md:divide-x md:divide-y-0 divide-y divide-x-0 divide-gray-300">
         {/* City Details go here */}
         {state.exists ? (
           <Fragment>
             {state.scores.length ? (
               <Fragment>
-                <div className="flex flex-col justify-around sm:w-1/2 w-full sm:my-0 my-2 sm:space-y-0 space-y-2">
+                <div className="flex flex-col justify-around md:w-1/2 w-full md:my-0 my-2 pb-2 md:space-y-4 space-y-2">
                   <QualityScore data={state.scores[0]}></QualityScore>
                   <QualityScore data={state.scores[1]}></QualityScore>
                   <QualityScore data={state.scores[2]}></QualityScore>
@@ -82,7 +82,7 @@ export default function CityCard({ data }) {
                   <QualityScore data={state.scores[7]}></QualityScore>
                   <QualityScore data={state.scores[8]}></QualityScore>
                 </div>
-                <div className="flex flex-col justify-around sm:w-1/2 w-full sm:my-0 my-2 sm:pt-0 pt-3 sm:space-y-0 space-y-2">
+                <div className="flex flex-col justify-around md:w-1/2 w-full md:my-0 my-2 md:pt-0 pt-6 md:space-y-0 space-y-2">
                   <QualityScore data={state.scores[9]}></QualityScore>
                   <QualityScore data={state.scores[10]}></QualityScore>
                   <QualityScore data={state.scores[11]}></QualityScore>

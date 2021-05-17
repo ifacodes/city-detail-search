@@ -43,6 +43,7 @@ function App() {
       <header className="py-3 gap-y-3 flex items-center flex-wrap bg-white h-auto">
         <form onSubmit={(e) => fetchApi(e, 1)}>
           <input
+            autoFocus
             type="search"
             value={search["1"]}
             placeholder="Search for a City"
