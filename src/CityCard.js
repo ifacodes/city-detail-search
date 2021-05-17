@@ -1,44 +1,18 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useRef, useEffect, useState } from "react";
 import QualityScore from "./QualityScore.js";
 
 export default function CityCard({ data }) {
-  const [state, setState] = useState({
-    name: { city: " No", country: "Where" },
-    geo_id: 0,
-    scores: [],
-    exists: true,
-  });
+  const [state, setState] = useState(data);
+
+  const previousStateRef = useRef();
+  const previousState = previousStateRef.current;
+  if (data !== previousState && data !== state) {
+    setState(data);
+  }
 
   useEffect(() => {
-    if (data?._embedded) {
-      const split = data._embedded["city:item"].full_name.split(",");
-      if (data?._embedded["city:item"]?._embedded) {
-        const scores =
-          data._embedded["city:item"]._embedded["city:urban_area"]._embedded[
-            "ua:scores"
-          ].categories;
-        setState((state) => ({
-          name: { city: split[0], country: split[2] },
-          geo_id: data._embedded["city:item"].geoname_id,
-          scores: scores,
-          exists: true,
-        }));
-      } else {
-        setState((state) => ({
-          ...state,
-          name: { city: split[0], country: split[2] },
-          geo_id: data._embedded["city:item"].geoname_id,
-          scores: [],
-          exists: true,
-        }));
-      }
-    } else {
-      setState((state) => ({
-        ...state,
-        exists: false,
-      }));
-    }
-  }, [data]);
+    previousStateRef.current = data;
+  });
 
   return (
     <div className="rounded-2xl shadow-lg bg-white md:w-5/6 w-full  my-10 flex flex-col">
@@ -98,7 +72,7 @@ export default function CityCard({ data }) {
                 </div>
               </Fragment>
             ) : (
-              <div className="my-auto mx-auto text-2xl font-semibold text-center pb-16">
+              <div className="my-auto mx-auto text-2xl font-semibold text-center py-16">
                 Life Quality Scores are currently unavailable for{" "}
                 {state.name.city}!
                 <br />

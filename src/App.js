@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect, Fragment } from "react";
+import { useState, Fragment } from "react";
 import CityCard from "./CityCard.js";
 import ComparisonCard from "./ComparisonCard.js";
 import WelcomeCard from "./WelcomeCard";
@@ -10,6 +10,38 @@ function App() {
   const [compare, setCompare] = useState(false);
   const [first, setFirst] = useState(true);
 
+  const parseData = (data) => {
+    if (data?._embedded) {
+      const split = data._embedded["city:item"].full_name.split(",");
+      if (data?._embedded["city:item"]?._embedded) {
+        const scores =
+          data._embedded["city:item"]._embedded["city:urban_area"]._embedded[
+            "ua:scores"
+          ].categories;
+        return {
+          name: { city: split[0], country: split[2] },
+          geo_id: data._embedded["city:item"].geoname_id,
+          scores: scores,
+          exists: true,
+        };
+      } else {
+        return {
+          name: { city: split[0], country: split[2] },
+          geo_id: data._embedded["city:item"].geoname_id,
+          scores: [],
+          exists: true,
+        };
+      }
+    } else {
+      return {
+        name: { city: "No", country: "Where" },
+        geo_id: 0,
+        scores: [],
+        exists: false,
+      };
+    }
+  };
+
   const fetchApi = (e, which) => {
     e.preventDefault();
     if (search[which].length > 1) {
@@ -19,24 +51,17 @@ function App() {
           "&embed=city:search-results/city:item/city:urban_area/ua:scores"
       )
         .then((response) => response.json())
-        .then((data) =>
+        .then((data) => {
           setCity({
             ...city,
-            [which]: data._embedded["city:search-results"][0],
-          })
-        );
-      setFirst(false);
+            [which]: parseData(data._embedded["city:search-results"][0]),
+          });
+          setFirst(false);
+        });
     } else {
       setCity({ ...city, [which]: {} });
     }
   };
-
-  useEffect(() => {
-    console.log(city);
-  }, [city]);
-  useEffect(() => {
-    console.log(compare);
-  }, [compare]);
 
   return (
     <div className="min-h-screen h-full w-screen bg-purple-400 flex flex-col">

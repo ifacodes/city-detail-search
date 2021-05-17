@@ -2,7 +2,7 @@ import React from "react";
 
 export default function WelcomeCard() {
   return (
-    <div className="rounded-2xl shadow-lg bg-white sm:w-5/6 w-full flex-grow my-10 flex flex-col">
+    <div className="rounded-2xl shadow-lg bg-white sm:w-5/6 w-full my-10 flex flex-col">
       <header className="flex items-center justify-between p-6 border-b border-solid border-gray-300 rounded-t">
         <div className="border-0 hover:border-2 hover:border-red-500">
           <h1 className="ml-2 text-3xl text-gray-700 font-semibold">

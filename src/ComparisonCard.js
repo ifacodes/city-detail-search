@@ -1,80 +1,29 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useRef, useEffect } from "react";
 import QualityScore from "./QualityScore.js";
 
 export default function ComparisonCard({ data }) {
-  const [city1, setCity1] = useState({
-    name: { city: " No", country: "Where" },
-    geo_id: 0,
-    scores: [],
-    exists: false,
-  });
-  const [city2, setCity2] = useState({
-    name: { city: " No", country: "Where" },
-    geo_id: 0,
-    scores: [],
-    exists: false,
+  const [city1, setCity1] = useState(data[1]);
+  const [city2, setCity2] = useState(data[2]);
+
+  const previousStateRef = useRef();
+  const previousState = previousStateRef.current;
+  if (data[1] !== previousState && data[1] !== city1) {
+    setCity1(data[1]);
+  }
+
+  const previousStateRef2 = useRef();
+  const previousState2 = previousStateRef2.current;
+  if (data[2] !== previousState2 && data[2] !== city2) {
+    setCity2(data[2]);
+  }
+
+  useEffect(() => {
+    previousStateRef.current = data[1];
   });
 
   useEffect(() => {
-    if (data[1]?._embedded) {
-      const split = data[1]._embedded["city:item"].full_name.split(",");
-      if (data[1]?._embedded["city:item"]?._embedded) {
-        const scores =
-          data[1]._embedded["city:item"]._embedded["city:urban_area"]._embedded[
-            "ua:scores"
-          ].categories;
-        setCity1({
-          name: { city: split[0], country: split[2] },
-          geo_id: data[1]._embedded["city:item"].geoname_id,
-          scores: scores,
-          exists: true,
-        });
-      } else {
-        setCity1({
-          name: { city: split[0], country: split[2] },
-          geo_id: data[1]._embedded["city:item"].geoname_id,
-          scores: [],
-          exists: true,
-        });
-      }
-    } else {
-      setCity1({
-        name: { city: " No", country: "Where" },
-        geo_id: 0,
-        scores: [],
-        exists: false,
-      });
-    }
-    if (data[2]?._embedded) {
-      const split = data[2]._embedded["city:item"].full_name.split(",");
-      if (data[2]?._embedded["city:item"]?._embedded) {
-        const scores =
-          data[2]._embedded["city:item"]._embedded["city:urban_area"]._embedded[
-            "ua:scores"
-          ].categories;
-        setCity2({
-          name: { city: split[0], country: split[2] },
-          geo_id: data[2]._embedded["city:item"].geoname_id,
-          scores: scores,
-          exists: true,
-        });
-      } else {
-        setCity2({
-          name: { city: split[0], country: split[2] },
-          geo_id: data[2]._embedded["city:item"].geoname_id,
-          scores: [],
-          exists: true,
-        });
-      }
-    } else {
-      setCity2({
-        name: { city: " No", country: "Where" },
-        geo_id: 0,
-        scores: [],
-        exists: false,
-      });
-    }
-  }, [data]);
+    previousStateRef2.current = data[2];
+  });
 
   return (
     <div className="rounded-2xl shadow-lg bg-white md:w-5/6 w-full flex-grow my-10 flex flex-col">
