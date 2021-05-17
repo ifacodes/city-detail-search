@@ -2,6 +2,7 @@
   "name": "city-detail-search",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/portfolio/city-detail-search",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@tailwindcss/forms": "^0.3.2",
