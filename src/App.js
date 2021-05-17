@@ -2,13 +2,14 @@ import "./App.css";
 import { useState, useEffect, Fragment } from "react";
 import CityCard from "./CityCard.js";
 import ComparisonCard from "./ComparisonCard.js";
+import WelcomeCard from "./WelcomeCard";
 
 function App() {
   const [search, setSearch] = useState({ 1: "", 2: "" });
   const [city, setCity] = useState({ 1: {}, 2: {} });
   const [compare, setCompare] = useState(false);
+  const [first, setFirst] = useState(true);
 
-  // FIXME: Doesn't handle connection refused or api not found
   const fetchApi = (e, which) => {
     e.preventDefault();
     if (search[which].length > 1) {
@@ -24,6 +25,7 @@ function App() {
             [which]: data._embedded["city:search-results"][0],
           })
         );
+      setFirst(false);
     } else {
       setCity({ ...city, [which]: {} });
     }
@@ -80,12 +82,20 @@ function App() {
         )}
       </header>
       <section className="flex-grow w-full flex flex-col justify-center items-center">
-        {compare ? (
+        {first ? (
           <Fragment>
-            <ComparisonCard data={city} />
+            <WelcomeCard />
           </Fragment>
         ) : (
-          <CityCard data={city[1]}></CityCard>
+          <Fragment>
+            {compare ? (
+              <Fragment>
+                <ComparisonCard data={city} />
+              </Fragment>
+            ) : (
+              <CityCard data={city[1]}></CityCard>
+            )}
+          </Fragment>
         )}
       </section>
     </div>
