@@ -9,7 +9,7 @@ export default function CityCard({ data }) {
   });
 
   useEffect(() => {
-    if (data._embedded) {
+    if (data?._embedded) {
       const split = data._embedded["city:item"].full_name.split(",");
       if (data?._embedded["city:item"]?._embedded) {
         const scores =
@@ -85,7 +85,7 @@ export default function CityCard({ data }) {
             <br />
             <br />
             <a href={`https://teleport.org/cities/vote/${state.geo_id}`}>
-              <div className="transition-transform transform-gpu font-semibold text-xl hover:scale-125">
+              <div className="transition-transform transform-gpu font-semibold text-xl underline hover:scale-125">
                 {state.name.city} on Teleport Cities
               </div>
             </a>

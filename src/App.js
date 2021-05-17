@@ -1,12 +1,14 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import CityCard from "./CityCard.js";
+import ComparisonCard from "./ComparisonCard.js";
 
 function App() {
   const [search, setSearch] = useState({ 1: "", 2: "" });
   const [city, setCity] = useState({ 1: {}, 2: {} });
   const [compare, setCompare] = useState(false);
 
+  // FIXME: Doesn't handle connection refused or api not found
   const fetchApi = (e, which) => {
     e.preventDefault();
     if (search[which].length > 1) {
@@ -22,7 +24,6 @@ function App() {
             [which]: data._embedded["city:search-results"][0],
           })
         );
-      setSearch({ ...search, [which]: "" });
     } else {
       setCity({ ...city, [which]: {} });
     }
@@ -36,8 +37,8 @@ function App() {
   }, [compare]);
 
   return (
-    <div className="min-h-screen h-full bg-purple-400 flex flex-col">
-      <header className="flex items-center bg-white h-16">
+    <div className="min-h-screen h-full w-screen bg-purple-400 flex flex-col">
+      <header className="py-3 gap-y-3 flex items-center flex-wrap bg-white h-auto">
         <form onSubmit={(e) => fetchApi(e, 1)}>
           <input
             type="search"
@@ -72,14 +73,20 @@ function App() {
               type="search"
               value={search[2]}
               placeholder="Compare With..."
-              className="mx-5 py-2 px-4 rounded-md border border-purple-500 outline-none focus:border-purple-500 focus:ring-purple-500"
+              className="mx-4 py-2 px-4 rounded-md border border-purple-500 outline-none focus:border-purple-500 focus:ring-purple-500"
               onChange={(e) => setSearch({ ...search, 2: e.target.value })}
             />
           </form>
         )}
       </header>
       <section className="flex-grow w-full flex flex-col justify-center items-center">
-        <CityCard data={city[1]}></CityCard>
+        {compare ? (
+          <Fragment>
+            <ComparisonCard data={city} />
+          </Fragment>
+        ) : (
+          <CityCard data={city[1]}></CityCard>
+        )}
       </section>
     </div>
   );
